@@ -7,9 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{70C84219-0C0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelAdesso.Domain", "src\HotelAdesso.Domain\HotelAdesso.Domain.csproj", "{067CBF8A-E4FC-46B6-AB38-A18CD9142ECE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelAdesso.Infrastructure", "src\HotelAdesso.Infrastructure\HotelAdesso.Infrastructure.csproj", "{A217BE40-0829-4628-99DE-A06C67927DC7}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelAdesso.WebAPI", "src\HotelAdesso.WebAPI\HotelAdesso.WebAPI.csproj", "{4561CF89-2570-4E99-ACFD-0903F26C79B3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelAdesso.Application", "src\HotelAdesso.Application\HotelAdesso.Application.csproj", "{11466764-65D2-410F-8F23-D58F179BDB6F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelAdesso.Persistence", "src\HotelAdesso.Persistence\HotelAdesso.Persistence.csproj", "{876BB4C6-E602-438A-B0D5-146D1306DEEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,22 +23,27 @@ Global
 		{067CBF8A-E4FC-46B6-AB38-A18CD9142ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{067CBF8A-E4FC-46B6-AB38-A18CD9142ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{067CBF8A-E4FC-46B6-AB38-A18CD9142ECE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A217BE40-0829-4628-99DE-A06C67927DC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A217BE40-0829-4628-99DE-A06C67927DC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A217BE40-0829-4628-99DE-A06C67927DC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A217BE40-0829-4628-99DE-A06C67927DC7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4561CF89-2570-4E99-ACFD-0903F26C79B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4561CF89-2570-4E99-ACFD-0903F26C79B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4561CF89-2570-4E99-ACFD-0903F26C79B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4561CF89-2570-4E99-ACFD-0903F26C79B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11466764-65D2-410F-8F23-D58F179BDB6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11466764-65D2-410F-8F23-D58F179BDB6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11466764-65D2-410F-8F23-D58F179BDB6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11466764-65D2-410F-8F23-D58F179BDB6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{876BB4C6-E602-438A-B0D5-146D1306DEEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{876BB4C6-E602-438A-B0D5-146D1306DEEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{876BB4C6-E602-438A-B0D5-146D1306DEEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{876BB4C6-E602-438A-B0D5-146D1306DEEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{067CBF8A-E4FC-46B6-AB38-A18CD9142ECE} = {70C84219-0C00-4B85-A6F0-E98A684693DD}
-		{A217BE40-0829-4628-99DE-A06C67927DC7} = {70C84219-0C00-4B85-A6F0-E98A684693DD}
 		{4561CF89-2570-4E99-ACFD-0903F26C79B3} = {70C84219-0C00-4B85-A6F0-E98A684693DD}
+		{11466764-65D2-410F-8F23-D58F179BDB6F} = {70C84219-0C00-4B85-A6F0-E98A684693DD}
+		{876BB4C6-E602-438A-B0D5-146D1306DEEC} = {70C84219-0C00-4B85-A6F0-E98A684693DD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {50A43718-CD38-4A16-B44C-22AECEBAAD2D}

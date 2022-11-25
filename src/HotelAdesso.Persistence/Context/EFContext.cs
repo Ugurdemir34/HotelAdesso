@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelAdesso.Infrastructure.Data
+namespace HotelAdesso.Persistence.Context
 {
     public class EFContext : DbContext
     {

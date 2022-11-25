@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelAdesso.Infrastructure.Data
+namespace HotelAdesso.Persistence.Context
 {
     public class EFContextSeed
     {

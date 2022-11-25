@@ -1,7 +1,22 @@
-using HotelAdesso.Infrastructure.Data;
+using HotelAdesso.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
-
+using HotelAdesso.Persistence;
+using Serilog;
 var builder = WebApplication.CreateBuilder(args);
+
+
+//Serilog Configuration
+
+var logger = new LoggerConfiguration()
+                 .ReadFrom.Configuration(builder.Configuration)
+                 .Enrich
+                 .FromLogContext()
+                 .CreateLogger();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
+
+//Serilog Configuration
 
 // Add services to the container.
 
@@ -9,18 +24,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddDbContext<EFContext>(opt =>
-{
-    opt.UseSqlServer("name=ConnectionStrings:HotelConnection");
-});
+builder.Services.AddServices();
 var app = builder.Build();
-using (var scope = app.Services.CreateScope() )
-{
-    var scopedProvider = scope.ServiceProvider;
-    var efContext = scopedProvider.GetRequiredService<EFContext>();
-    EFContextSeed.Seed(efContext);
-}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

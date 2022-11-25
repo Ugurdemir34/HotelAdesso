@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelAdesso.Domain.Interfaces
+namespace HotelAdesso.Application.Interfaces.Repositories
 {
-    public interface IHotelRepository : IRepository<Hotel>
+    public interface IGuestRepository:IRepository<Guest>
     {
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace HotelAdesso.Infrastructure.Migrations
+namespace HotelAdesso.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class DbCreation : Migration
@@ -170,7 +170,7 @@ namespace HotelAdesso.Infrastructure.Migrations
                         column: x => x.BookingId,
                         principalTable: "Bookings",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_BookedRooms_Rooms_RoomId",
                         column: x => x.RoomId,
