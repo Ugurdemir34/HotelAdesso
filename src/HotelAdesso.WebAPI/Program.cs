@@ -2,6 +2,9 @@ using HotelAdesso.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using HotelAdesso.Persistence;
 using Serilog;
+using Microsoft.AspNetCore.Mvc;
+using HotelAdesso.WebAPI;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -25,6 +28,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddServices();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

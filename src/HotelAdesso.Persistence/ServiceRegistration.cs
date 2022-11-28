@@ -1,4 +1,8 @@
-﻿using HotelAdesso.Persistence.Context;
+﻿using HotelAdesso.Application.Interfaces.Repositories;
+using HotelAdesso.Application.UnitOfWork;
+using HotelAdesso.Persistence.Context;
+using HotelAdesso.Persistence.Repositories;
+using HotelAdesso.Persistence.UnitOfWorks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,7 +28,9 @@ namespace HotelAdesso.Persistence
                 var efContext = scopedProvider.GetRequiredService<EFContext>();
                 EFContextSeed.Seed(efContext);
             }
-
+            serviceCollection.AddTransient<IHotelRepository, HotelRepository>();
+            serviceCollection.AddTransient<IUnitOfWork, UnitOfWork>();
+            serviceCollection.AddTransient<IGuestRepository, GuestRepository>();
         }
     }
 }

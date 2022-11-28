@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HotelAdesso.Application.Interfaces.Repositories
 {
-    public interface IRepository<T> where T:BaseEntity,new()
+    public interface IRepository<T> where T : BaseEntity, new()
     {
-        T Add(T entity);
-        Task<T> AddAsync(T entity);
-        List<T> List(Expression<Func<T, bool>> filter);
-        Task<List<T>> ListAsync(Expression<Func<T, bool>> filter);
+        IDataResult<T> Add(T entity);
+        Task<IDataResult<T>> AddAsync(T entity);
+        IDataResult<List<T>> List(Expression<Func<T, bool>> filter);
+        Task<IDataResult<List<T>>> ListAsync(Expression<Func<T, bool>> filter);
     }
 }

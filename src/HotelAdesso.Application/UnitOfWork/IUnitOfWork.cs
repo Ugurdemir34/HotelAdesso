@@ -1,4 +1,5 @@
 ﻿using HotelAdesso.Application.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,10 @@ namespace HotelAdesso.Application.UnitOfWork
 {
     public interface IUnitOfWork : IAsyncDisposable
     {
-        Task<IDbContextTransaction> BeginTransactionAsync();
+        void CreateTransaction();
+        void RollBack();
+        void Save();
+        void Commit();
         public IHotelRepository HotelRepository { get; }
         public IGuestRepository GuestRepository { get; }
     }

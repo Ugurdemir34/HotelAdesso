@@ -1,4 +1,5 @@
 ﻿using HotelAdesso.Application.Interfaces.Repositories;
+using HotelAdesso.Application.Messages;
 using HotelAdesso.Application.Wrappers;
 using HotelAdesso.Domain.Base;
 using HotelAdesso.Persistence.Context;
@@ -15,33 +16,60 @@ namespace HotelAdesso.Persistence.Repositories
     public class Repository<T> : IRepository<T> where T : BaseEntity, new()
     {
         private readonly EFContext _context;
+        private readonly ResultMessages _messages;
         public Repository(EFContext context)
         {
+            _messages = new ResultMessages(typeof(T).Name);
             _context = context;
         }
         private DbSet<T> Table { get => _context.Set<T>(); }
 
-        public T Add(T entity)
+        public IDataResult<T> Add(T entity)
         {
-            Table.Add(entity);
-            return entity;
+            var addedResult = Table.Add(entity);
+            if (addedResult !=null)
+            {
+                return new SuccessDataResult<T>(entity, _messages.SuccessAdded);
+            }
+            return new ErrorDataResult<T>(entity, _messages.ErrorAdded);
         }
 
-        public async Task<T> AddAsync(T entity)
+        public Task<IDataResult<T>> AddAsync(T entity)
         {
-            await Table.AddAsync(entity);
-            return await Task.FromResult<T>(entity);
+            throw new NotImplementedException();
         }
 
-        public List<T> List(Expression<Func<T, bool>> filter)
+        public IDataResult<List<T>> List(Expression<Func<T, bool>> filter)
         {
-            return Table.Where(filter).ToList();
+            throw new NotImplementedException();
         }
 
-        public async Task<List<T>> ListAsync(Expression<Func<T, bool>> filter)
+        public Task<IDataResult<List<T>>> ListAsync(Expression<Func<T, bool>> filter)
         {
-            var result = await Table.Where(filter).ToListAsync();
-            return await Task.FromResult(result);
+            throw new NotImplementedException();
         }
+
+        //public T Add(T entity)
+        //{
+        //    Table.Add(entity);
+        //    return entity;
+        //}
+
+        //public async Task<T> AddAsync(T entity)
+        //{
+        //    await Table.AddAsync(entity);
+        //    return await Task.FromResult<T>(entity);
+        //}
+
+        //public List<T> List(Expression<Func<T, bool>> filter)
+        //{
+        //    return Table.Where(filter).ToList();
+        //}
+
+        //public async Task<List<T>> ListAsync(Expression<Func<T, bool>> filter)
+        //{
+        //    var result = await Table.Where(filter).ToListAsync();
+        //    return await Task.FromResult(result);
+        //}
     }
 }
