@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace HotelAdesso.WebAPI.Controllers
 {
 
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
     public class HotelController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -20,6 +22,7 @@ namespace HotelAdesso.WebAPI.Controllers
             _mapper = mapper;
         }
         [HttpPost("addHotel")]
+        [MapToApiVersion("1.0")]
         public IActionResult AddHotel(HotelDto model)
         {
             _unitOfWork.CreateTransaction();
@@ -33,8 +36,10 @@ namespace HotelAdesso.WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpPost("asdasd")]
-        public IActionResult adasd(int id)
+        [HttpPost("versionTest")]
+        [MapToApiVersion("2.0")]
+
+        public IActionResult VersionTest(int id)
         {
             return Ok();
         }
