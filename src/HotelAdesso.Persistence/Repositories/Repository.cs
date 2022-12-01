@@ -35,10 +35,6 @@ namespace HotelAdesso.Persistence.Repositories
             return new ErrorDataResult<T>(entity, _messages.ErrorAdded);
         }
 
-        public Task<IDataResult<T>> AddAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
 
         public IResult Delete(Guid id)
         {
@@ -63,12 +59,28 @@ namespace HotelAdesso.Persistence.Repositories
             }
             return new ErrorDataResult<List<T>>(listedResult, _messages.ErrorList);
         }
-
-        public Task<IDataResult<List<T>>> ListAsync(Expression<Func<T, bool>> filter =null)
+        public IDataResult<T> Update(T entity)
+        {
+            try
+            {
+                Table.Attach(entity);
+                Table.Entry(entity).State = EntityState.Modified;
+                return new SuccessDataResult<T>(entity, _messages.SuccessUpdate);
+            }
+            catch (Exception ex)
+            {
+                return new ErrorDataResult<T>(entity, _messages.ErrorUpdate);
+            }
+        }
+        public Task<IDataResult<T>> AddAsync(T entity)
         {
             throw new NotImplementedException();
         }
 
+        public Task<IDataResult<List<T>>> ListAsync(Expression<Func<T, bool>> filter =null)
+        {
+            throw new NotImplementedException();
+        }    
         //public T Add(T entity)
         //{
         //    Table.Add(entity);

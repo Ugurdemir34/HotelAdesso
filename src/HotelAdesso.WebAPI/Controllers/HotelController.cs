@@ -14,14 +14,19 @@ namespace HotelAdesso.WebAPI.Controllers
     [ApiVersion("2.0")]
     public class HotelController : ControllerBase
     {
+        #region Variables
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        #endregion
+        #region Constructor
         public HotelController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-        }
-        [HttpPost("listHotels")]
+        } 
+        #endregion
+        #region Get All Hotels
+        [HttpPost("getHotels")]
         [MapToApiVersion("1.0")]
         public IActionResult GetHotels()
         {
@@ -29,6 +34,8 @@ namespace HotelAdesso.WebAPI.Controllers
             var result = _unitOfWork.HotelRepository.List();
             return Ok(result);
         }
+        #endregion
+        #region Add New Hotel
         [HttpPost("addHotel")]
         [MapToApiVersion("1.0")]
         public IActionResult AddHotel(HotelDto model)
@@ -44,6 +51,8 @@ namespace HotelAdesso.WebAPI.Controllers
             }
             return BadRequest(result);
         }
+        #endregion
+        #region Delete Hotel
         [HttpDelete("deleteHotel/{id}")]
         [MapToApiVersion("1.0")]
         public IActionResult DeleteHotelById(Guid id)
@@ -58,13 +67,23 @@ namespace HotelAdesso.WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        
-        //[HttpPost("versionTest")]
-        //[MapToApiVersion("2.0")]
-
-        //public IActionResult VersionTest(int id)
-        //{
-        //    return Ok();
-        //}
+        #endregion
+        #region Update Hotel
+        [HttpPut("updateHotel")]
+        [MapToApiVersion("1.0")]
+        public IActionResult UpdateHotel(Guid id, HotelDto model)
+        {
+            _unitOfWork.CreateTransaction();
+            var updatedHotel = _mapper.Map<Hotel>(model);
+            var result = _unitOfWork.HotelRepository.Update(updatedHotel);
+            if (result.IsSuccess)
+            {
+                _unitOfWork.Save();
+                _unitOfWork.Commit();
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        #endregion
     }
 }

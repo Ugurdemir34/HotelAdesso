@@ -12,9 +12,13 @@ namespace HotelAdesso.Application.Interfaces.Repositories
     public interface IRepository<T> where T : BaseEntity, new()
     {
         IDataResult<T> Add(T entity);
-        Task<IDataResult<T>> AddAsync(T entity);
         IDataResult<List<T>> List(Expression<Func<T, bool>> filter=null);
-        Task<IDataResult<List<T>>> ListAsync(Expression<Func<T, bool>> filter =null);
         IResult Delete(Guid id);
+        IDataResult<T> Update(T entity);
+        #region Async
+        Task<IDataResult<T>> AddAsync(T entity);
+        Task<IDataResult<List<T>>> ListAsync(Expression<Func<T, bool>> filter = null); 
+        #endregion
+
     }
 }
