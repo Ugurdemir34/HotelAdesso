@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HotelAdesso.Application.Wrappers.Abstract;
 
-namespace HotelAdesso.Application.Wrappers
+namespace HotelAdesso.Application.Wrappers.Concrete
 {
     public class Result : IResult
     {
-        public Result(bool isSuccess,string message)
+        public Result(bool isSuccess, string message)
         {
-            IsSuccess = IsSuccess;
+            IsSuccess = isSuccess;
             Message = message;
         }
         public bool IsSuccess { get; }

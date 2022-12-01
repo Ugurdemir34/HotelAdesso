@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using HotelAdesso.Persistence;
 using Serilog;
 using Microsoft.AspNetCore.Mvc;
-using HotelAdesso.WebAPI;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Options;
+using HotelAdesso.WebAPI.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +29,9 @@ builder.Logging.AddSerilog(logger);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Health Check 
+builder.Services.AddHealthChecks();
+// Health Check
 builder.Services.AddVersionedApiExplorer(opt =>
 {
     opt.GroupNameFormat = "'v'VVV";
@@ -49,6 +52,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();
 var app = builder.Build();
 
+app.UseHealthChecks("/health");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

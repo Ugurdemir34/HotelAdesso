@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HotelAdesso.Application.Wrappers.Abstract;
 
-namespace HotelAdesso.Application.Wrappers
+namespace HotelAdesso.Application.Wrappers.Concrete
 {
     public class DataResult<T> : IDataResult<T>
     {
-        public DataResult(T data,bool isSuccess,string message)
+        public DataResult(T data, bool isSuccess, string message)
         {
             Data = data;
             IsSuccess = isSuccess;
