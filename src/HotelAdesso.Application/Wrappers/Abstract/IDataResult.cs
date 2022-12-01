@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelAdesso.Application.Wrappers
+namespace HotelAdesso.Application.Wrappers.Abstract
 {
-    public interface IResult
+    public interface IDataResult<T> : IResult
     {
-        bool IsSuccess { get; }
-        string Message { get; }
+        T Data { get; }
     }
 }

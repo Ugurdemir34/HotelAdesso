@@ -1,4 +1,4 @@
-﻿using HotelAdesso.Application.Wrappers;
+﻿using HotelAdesso.Application.Wrappers.Abstract;
 using HotelAdesso.Domain.Base;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,8 @@ namespace HotelAdesso.Application.Interfaces.Repositories
     {
         IDataResult<T> Add(T entity);
         Task<IDataResult<T>> AddAsync(T entity);
-        IDataResult<List<T>> List(Expression<Func<T, bool>> filter);
-        Task<IDataResult<List<T>>> ListAsync(Expression<Func<T, bool>> filter);
+        IDataResult<List<T>> List(Expression<Func<T, bool>> filter=null);
+        Task<IDataResult<List<T>>> ListAsync(Expression<Func<T, bool>> filter =null);
+        IResult Delete(Guid id);
     }
 }

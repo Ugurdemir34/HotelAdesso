@@ -1,6 +1,7 @@
 ﻿using HotelAdesso.Application.Interfaces.Repositories;
 using HotelAdesso.Application.Messages;
-using HotelAdesso.Application.Wrappers;
+using HotelAdesso.Application.Wrappers.Abstract;
+using HotelAdesso.Application.Wrappers.Concrete;
 using HotelAdesso.Domain.Base;
 using HotelAdesso.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
@@ -39,12 +40,31 @@ namespace HotelAdesso.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public IDataResult<List<T>> List(Expression<Func<T, bool>> filter)
+        public IResult Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var deletedResult = Table.Find(id);
+            if (deletedResult!=null)
+            {
+                Table.Remove(deletedResult);
+                return new SuccessResult(_messages.SuccessDelete);
+            }
+            return new ErrorResult(_messages.ErrorDelete);
+
         }
 
-        public Task<IDataResult<List<T>>> ListAsync(Expression<Func<T, bool>> filter)
+        public IDataResult<List<T>> List(Expression<Func<T, bool>> filter=null)
+        {
+            var listedResult= filter == null
+                          ? Table.ToList()
+                          : Table.Where(filter).ToList();
+            if (listedResult.Any())
+            {
+                return new SuccessDataResult<List<T>>(listedResult, _messages.SuccessList);
+            }
+            return new ErrorDataResult<List<T>>(listedResult, _messages.ErrorList);
+        }
+
+        public Task<IDataResult<List<T>>> ListAsync(Expression<Func<T, bool>> filter =null)
         {
             throw new NotImplementedException();
         }

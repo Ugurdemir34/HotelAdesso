@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelAdesso.Application.Wrappers
+namespace HotelAdesso.Application.Wrappers.Concrete
 {
     public class SuccessDataResult<T> : DataResult<T>
     {

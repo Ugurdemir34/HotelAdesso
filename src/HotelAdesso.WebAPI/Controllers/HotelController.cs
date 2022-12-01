@@ -21,6 +21,14 @@ namespace HotelAdesso.WebAPI.Controllers
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+        [HttpPost("listHotels")]
+        [MapToApiVersion("1.0")]
+        public IActionResult GetHotels()
+        {
+            _unitOfWork.CreateTransaction();
+            var result = _unitOfWork.HotelRepository.List();
+            return Ok(result);
+        }
         [HttpPost("addHotel")]
         [MapToApiVersion("1.0")]
         public IActionResult AddHotel(HotelDto model)
@@ -36,12 +44,27 @@ namespace HotelAdesso.WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpPost("versionTest")]
-        [MapToApiVersion("2.0")]
-
-        public IActionResult VersionTest(int id)
+        [HttpDelete("deleteHotel/{id}")]
+        [MapToApiVersion("1.0")]
+        public IActionResult DeleteHotelById(Guid id)
         {
-            return Ok();
+            _unitOfWork.CreateTransaction();
+            var result = _unitOfWork.HotelRepository.Delete(id);
+            if (result.IsSuccess)
+            {
+                _unitOfWork.Save();
+                _unitOfWork.Commit();
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
+        
+        //[HttpPost("versionTest")]
+        //[MapToApiVersion("2.0")]
+
+        //public IActionResult VersionTest(int id)
+        //{
+        //    return Ok();
+        //}
     }
 }
