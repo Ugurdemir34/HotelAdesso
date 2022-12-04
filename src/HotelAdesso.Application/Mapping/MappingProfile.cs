@@ -15,6 +15,9 @@ namespace HotelAdesso.Application.Mapping
         {
             CreateMap<HotelDto, Hotel>();
             CreateMap<GuestDto, Guest>();
+            CreateMap<RoomDto, Room>();
+            CreateMap<RoomTypeDto, RoomType>();
+            CreateMap<RoomStatusDto, RoomStatus>();
         }
     }
 }
