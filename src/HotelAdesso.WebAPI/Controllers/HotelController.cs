@@ -26,7 +26,7 @@ namespace HotelAdesso.WebAPI.Controllers
         } 
         #endregion
         #region Get All Hotels
-        [HttpPost("getHotels")]
+        [HttpGet("getHotels")]
         [MapToApiVersion("1.0")]
         public IActionResult GetHotels()
         {

@@ -18,11 +18,22 @@ namespace HotelAdesso.Persistence.UnitOfWorks
         private IDbContextTransaction _transaction;
         public IHotelRepository HotelRepository { get; }
         public IGuestRepository GuestRepository { get; }
-        public UnitOfWork(EFContext context, IHotelRepository hotelRepository, IGuestRepository guestRepository)
+        public IRoomStatusRepository RoomStatusRepository { get; }
+        public IRoomTypeRepository RoomTypeRepository { get; }
+        public IRoomRepository RoomRepository { get; }
+        public UnitOfWork(EFContext context,
+                          IHotelRepository hotelRepository,
+                          IGuestRepository guestRepository,
+                          IRoomTypeRepository roomTypeRepository,
+                          IRoomStatusRepository roomStatusRepository,
+                          IRoomRepository roomRepository)
         {
             _context = context;
             HotelRepository = hotelRepository;
             GuestRepository = guestRepository;
+            RoomTypeRepository = roomTypeRepository;
+            RoomStatusRepository = roomStatusRepository;
+            RoomRepository = roomRepository;
         }
         public async ValueTask Dispose() { }
         public int SaveChanges() => _context.SaveChanges();

@@ -29,8 +29,11 @@ namespace HotelAdesso.Persistence
                 EFContextSeed.Seed(efContext);
             }
             serviceCollection.AddTransient<IHotelRepository, HotelRepository>();
-            serviceCollection.AddTransient<IUnitOfWork, UnitOfWork>();
             serviceCollection.AddTransient<IGuestRepository, GuestRepository>();
+            serviceCollection.AddTransient<IRoomRepository, RoomRepository>();
+            serviceCollection.AddTransient<IRoomTypeRepository, RoomTypeRepository>();
+            serviceCollection.AddTransient<IRoomStatusRepository, RoomStatusRepository>();
+            serviceCollection.AddTransient<IUnitOfWork, UnitOfWork>();
         }
     }
 }

@@ -17,5 +17,8 @@ namespace HotelAdesso.Application.UnitOfWork
         void Commit();
         public IHotelRepository HotelRepository { get; }
         public IGuestRepository GuestRepository { get; }
+        public IRoomRepository RoomRepository { get; }
+        public IRoomTypeRepository RoomTypeRepository { get; }
+        public IRoomStatusRepository RoomStatusRepository { get; }
     }
 }
