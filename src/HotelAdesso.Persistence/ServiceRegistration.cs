@@ -33,6 +33,7 @@ namespace HotelAdesso.Persistence
             serviceCollection.AddTransient<IRoomRepository, RoomRepository>();
             serviceCollection.AddTransient<IRoomTypeRepository, RoomTypeRepository>();
             serviceCollection.AddTransient<IRoomStatusRepository, RoomStatusRepository>();
+            serviceCollection.AddTransient<IBookingRepository, BookingRepository>();
             serviceCollection.AddTransient<IUnitOfWork, UnitOfWork>();
         }
     }
