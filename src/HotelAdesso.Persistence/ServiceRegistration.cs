@@ -16,7 +16,7 @@ namespace HotelAdesso.Persistence
 {
     public static class ServiceRegistration
     {
-        public static void AddServices(this IServiceCollection serviceCollection,IConfiguration configuration = null)
+        public static void AddServices(this IServiceCollection serviceCollection, IConfiguration configuration = null)
         {
             serviceCollection.AddDbContext<EFContext>(opt =>
             {
@@ -34,6 +34,7 @@ namespace HotelAdesso.Persistence
             serviceCollection.AddTransient<IRoomTypeRepository, RoomTypeRepository>();
             serviceCollection.AddTransient<IRoomStatusRepository, RoomStatusRepository>();
             serviceCollection.AddTransient<IBookingRepository, BookingRepository>();
+            serviceCollection.AddTransient<IBookedRoomRepository, BookedRoomRepository>();
             serviceCollection.AddTransient<IUnitOfWork, UnitOfWork>();
         }
     }

@@ -17,11 +17,10 @@ namespace HotelAdesso.Persistence.Repositories
     public class BookingRepository : Repository<Booking>, IBookingRepository
     {
         private EFContext _context;
-        private ResultMessages _resultMessage;
-        public BookingRepository(EFContext context, ResultMessages resultMessage) : base(context)
+        //private ResultMessages _resultMessage = new ResultMessages(nameof(Booking));
+        public BookingRepository(EFContext context) : base(context)
         {
             _context = context;
-            _resultMessage = resultMessage;
         }
         public IDataResult<List<BookingListDto>> getAllBooking()
         {
@@ -31,9 +30,13 @@ namespace HotelAdesso.Persistence.Repositories
                 Id = booking.Id,
                 ModifiedDate = booking.ModifiedDate,
                 HotelName = booking.Hotel.Name,
-                GuestName = booking.Guest.FirstName + " " + booking.Guest.LastName
+                GuestName = booking.Guest.FirstName + " " + booking.Guest.LastName,
+                DateFrom=booking.DateFrom,
+                DateTo = booking.DateTo,
+                GuestId = booking.GuestId,
+                HotelId = booking.HotelId
             }).ToList();
-            return new SuccessDataResult<List<BookingListDto>>(bookingList, _resultMessage.SuccessList);
+            return new SuccessDataResult<List<BookingListDto>>(bookingList, this._messages.SuccessList);
         }
     }
 }

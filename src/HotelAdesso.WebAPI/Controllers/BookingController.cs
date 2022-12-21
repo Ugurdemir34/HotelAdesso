@@ -23,6 +23,7 @@ namespace HotelAdesso.WebAPI.Controllers
             _mapper = mapper;
         }
         #endregion
+        #region BOOKING
         #region Get All Booking
         [HttpGet("getBooking")]
         [MapToApiVersion("2.0")]
@@ -69,11 +70,11 @@ namespace HotelAdesso.WebAPI.Controllers
         #region Update Booking
         [HttpPut("updateBooking")]
         [MapToApiVersion("2.0")]
-        public IActionResult UpdateHotel(Guid id, BookingDto model)
+        public IActionResult UpdateBooking(Guid id, BookingDto model)
         {
             _unitOfWork.CreateTransaction();
-            var updatedGuest = _mapper.Map<Booking>(model);
-            var result = _unitOfWork.BookingRepository.Update(updatedGuest);
+            var updatedBooking = _mapper.Map<Booking>(model);
+            var result = _unitOfWork.BookingRepository.Update(updatedBooking);
             if (result.IsSuccess)
             {
                 _unitOfWork.Save();
@@ -83,5 +84,69 @@ namespace HotelAdesso.WebAPI.Controllers
             return BadRequest(result);
         }
         #endregion
+        #endregion
+        #region BOOKEDROOMS
+        #region Get All BookedRooms
+        [HttpGet("getBookedRooms")]
+        [MapToApiVersion("2.0")]
+        public IActionResult GetBookedRooms()
+        {
+            _unitOfWork.CreateTransaction();
+            var result = _unitOfWork.BookedRoomRepository.getAllBookedRooms();
+            return Ok(result);
+        }
+        #endregion
+        #region Add BookedRoom
+        [HttpPost("addBookedRoom")]
+        [MapToApiVersion("2.0")]
+        public IActionResult AddBookedRoom(BookedRoomDto model)
+        {
+            _unitOfWork.CreateTransaction();
+            var newBookedRoom = _mapper.Map<BookedRoom>(model);
+            var result = _unitOfWork.BookedRoomRepository.Add(newBookedRoom);
+            if (result.IsSuccess)
+            {
+                _unitOfWork.Save();
+                _unitOfWork.Commit();
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        #endregion
+        #region Delete BookedRoom
+        [HttpDelete("deleteBookedRoom/{id}")]
+        [MapToApiVersion("2.0")]
+        public IActionResult DeleteBookedRoomById(Guid id)
+        {
+            _unitOfWork.CreateTransaction();
+            var result = _unitOfWork.BookedRoomRepository.Delete(id);
+            if (result.IsSuccess)
+            {
+                _unitOfWork.Save();
+                _unitOfWork.Commit();
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        #endregion
+        #region Update BookedRoom
+        [HttpPut("updateBookedRoom")]
+        [MapToApiVersion("2.0")]
+        public IActionResult UpdateBookedRoom(Guid id, BookedRoomDto model)
+        {
+            _unitOfWork.CreateTransaction();
+            var updatedBookedRoom = _mapper.Map<BookedRoom>(model);
+            var result = _unitOfWork.BookedRoomRepository.Update(updatedBookedRoom);
+            if (result.IsSuccess)
+            {
+                _unitOfWork.Save();
+                _unitOfWork.Commit();
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        #endregion
+        #endregion
+
     }
 }

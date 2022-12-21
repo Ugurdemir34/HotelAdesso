@@ -17,7 +17,7 @@ namespace HotelAdesso.Persistence.Repositories
     public class Repository<T> : IRepository<T> where T : BaseEntity, new()
     {
         private readonly EFContext _context;
-        private readonly ResultMessages _messages;
+        public readonly ResultMessages _messages;
         public Repository(EFContext context)
         {
             _messages = new ResultMessages(typeof(T).Name);
