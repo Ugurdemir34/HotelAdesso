@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace HotelAdesso.Application.Interfaces.Repositories
 {
-    public interface IRoomRepository : IRepository<Room>
+    public interface IBookedRoomRepository : IRepository<BookedRoom>
     {
-        IDataResult<List<RoomListDto>> GetAllRoom();
+        IDataResult<List<BookedRoomListDto>> getAllBookedRooms();
     }
 }

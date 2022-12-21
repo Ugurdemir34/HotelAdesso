@@ -17,7 +17,7 @@ namespace HotelAdesso.Persistence.Repositories
     public class Repository<T> : IRepository<T> where T : BaseEntity, new()
     {
         private readonly EFContext _context;
-        private readonly ResultMessages _messages;
+        public readonly ResultMessages _messages;
         public Repository(EFContext context)
         {
             _messages = new ResultMessages(typeof(T).Name);
@@ -28,7 +28,7 @@ namespace HotelAdesso.Persistence.Repositories
         public IDataResult<T> Add(T entity)
         {
             var addedResult = Table.Add(entity);
-            if (addedResult !=null)
+            if (addedResult != null)
             {
                 return new SuccessDataResult<T>(entity, _messages.SuccessAdded);
             }
@@ -39,7 +39,7 @@ namespace HotelAdesso.Persistence.Repositories
         public IResult Delete(Guid id)
         {
             var deletedResult = Table.Find(id);
-            if (deletedResult!=null)
+            if (deletedResult != null)
             {
                 Table.Remove(deletedResult);
                 return new SuccessResult(_messages.SuccessDelete);
@@ -48,16 +48,21 @@ namespace HotelAdesso.Persistence.Repositories
 
         }
 
-        public IDataResult<List<T>> List(Expression<Func<T, bool>> filter=null)
+        public IDataResult<List<T>> List(Expression<Func<T, bool>> filter = null)
         {
-            var listedResult= filter == null
-                          ? Table.ToList()
-                          : Table.Where(filter).ToList();
-            if (listedResult.Any())
+            try
             {
+                var listedResult = filter == null
+                                  ? Table.ToList()
+                                  : Table.Where(filter).ToList();
+
                 return new SuccessDataResult<List<T>>(listedResult, _messages.SuccessList);
+
             }
-            return new ErrorDataResult<List<T>>(listedResult, _messages.ErrorList);
+            catch (Exception)
+            {
+                return new ErrorDataResult<List<T>>(null, _messages.ErrorList);
+            }
         }
         public IDataResult<T> Update(T entity)
         {
@@ -77,10 +82,10 @@ namespace HotelAdesso.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IDataResult<List<T>>> ListAsync(Expression<Func<T, bool>> filter =null)
+        public Task<IDataResult<List<T>>> ListAsync(Expression<Func<T, bool>> filter = null)
         {
             throw new NotImplementedException();
-        }    
+        }
         //public T Add(T entity)
         //{
         //    Table.Add(entity);

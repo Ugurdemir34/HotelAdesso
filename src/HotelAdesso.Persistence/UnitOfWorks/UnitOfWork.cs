@@ -21,12 +21,16 @@ namespace HotelAdesso.Persistence.UnitOfWorks
         public IRoomStatusRepository RoomStatusRepository { get; }
         public IRoomTypeRepository RoomTypeRepository { get; }
         public IRoomRepository RoomRepository { get; }
+        public IBookingRepository BookingRepository { get; }
+        public IBookedRoomRepository BookedRoomRepository { get; }
         public UnitOfWork(EFContext context,
                           IHotelRepository hotelRepository,
                           IGuestRepository guestRepository,
                           IRoomTypeRepository roomTypeRepository,
                           IRoomStatusRepository roomStatusRepository,
-                          IRoomRepository roomRepository)
+                          IRoomRepository roomRepository,
+                          IBookingRepository bookingRepository,
+                          IBookedRoomRepository bookedRoomRepository)
         {
             _context = context;
             HotelRepository = hotelRepository;
@@ -34,6 +38,8 @@ namespace HotelAdesso.Persistence.UnitOfWorks
             RoomTypeRepository = roomTypeRepository;
             RoomStatusRepository = roomStatusRepository;
             RoomRepository = roomRepository;
+            BookingRepository = bookingRepository;
+            BookedRoomRepository = bookedRoomRepository;
         }
         public async ValueTask Dispose() { }
         public int SaveChanges() => _context.SaveChanges();

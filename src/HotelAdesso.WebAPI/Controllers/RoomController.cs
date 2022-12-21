@@ -155,7 +155,7 @@ namespace HotelAdesso.WebAPI.Controllers
         public IActionResult GetRoom()
         {
             _unitOfWork.CreateTransaction();
-            var result = _unitOfWork.RoomRepository.getAllRoom();
+            var result = _unitOfWork.RoomRepository.GetAllRoom();
             return Ok(result);
         }
         #endregion

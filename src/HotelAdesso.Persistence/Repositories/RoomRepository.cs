@@ -20,7 +20,7 @@ namespace HotelAdesso.Persistence.Repositories
             _context = context;
         }
 
-        public IDataResult<List<RoomListDto>> getAllRoom()
+        public IDataResult<List<RoomListDto>> GetAllRoom()
         {
             var roomList = _context.Rooms.Select(room => new RoomListDto
             {
